@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WalletX | Financial Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ff88;
+            --secondary: #060606;
+            --background: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --text-light: #e0e0e0;
+            --text-muted: #777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(15, 15, 15, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-circle {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .back-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        /* Project Hero */
+        .project-hero {
+            padding: 10rem 0 4rem;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+        }
+
+        .project-hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .project-hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .project-hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .project-hero-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            height: 350px;
+            position: relative;
+        }
+
+        .project-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,168,255,0.1) 0%, rgba(0,168,255,0.05) 100%);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .project-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .project-link:hover::after {
+            width: 100%;
+        }
+
+        /* Project Details */
+        .project-details {
+            padding: 5rem 0;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .project-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: white;
+        }
+
+        .project-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .project-content img {
+            width: 100%;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .feature-list {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Project Meta */
+        .project-meta {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            height: fit-content;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .meta-section {
+            margin-bottom: 2rem;
+        }
+
+        .meta-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-item {
+            background: rgba(0, 168, 255, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        .project-links-list a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-links-list a:hover {
+            color: var(--primary);
+        }
+
+        .project-links-list i {
+            width: 20px;
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .project-hero-content,
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-hero-text {
+                order: 1;
+            }
+
+            .project-hero-image {
+                order: 2;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .project-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <nav>
+            <a href="../index.html" class="logo">
+                <span class="logo-circle"></span>
+                Portfolio
+            </a>
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to projects
+            </a>
+        </nav>
+    </div>
+</header>
+
+<section class="project-hero">
+    <div class="container">
+        <div class="project-hero-content">
+            <div class="project-hero-text">
+                <h1>WalletX</h1>
+                <p>A comprehensive financial dashboard that seamlessly syncs stocks, cryptocurrencies, and fiat currencies in real-time. WalletX provides users with a unified view of their entire portfolio with advanced analytics and market insights.</p>
+
+                <div class="project-links">
+                    <a href="#" class="project-link">
+                        <i class="fab fa-github"></i> Explore Code
+                    </a>
+                    <a href="#" class="project-link">
+                        <i class="fas fa-android"></i>
+                        <i class="fas fa-app-store-ios"></i>Download
+                    </a>
+                </div>
+            </div>
+            <div class="project-hero-image">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="WalletX Dashboard">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+        <div class="details-grid">
+            <div class="project-content">
+                <h2>Financial Management Reimagined</h2>
+                <p>WalletX revolutionizes personal finance management by combining traditional banking data with cryptocurrency and stock market information in a single, intuitive interface. The app automatically categorizes transactions, tracks portfolio performance, and provides predictive analytics based on market trends.</p>
+
+                <h3>Key Features</h3>
+                <ul class="feature-list">
+                    <li>Real-time synchronization of stocks, crypto, and fiat balances</li>
+                    <li>Customizable dashboard with interactive charts</li>
+                    <li>AI-powered spending insights and budgeting tools</li>
+                    <li>Cross-platform compatibility (iOS, Android, Web)</li>
+                    <li>Secure end-to-end encryption for all financial data</li>
+                    <li>Personalized market alerts and notifications</li>
+                </ul>
+
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="WalletX Mobile Interface">
+
+                <h3>Technical Implementation</h3>
+                <p>Built with Flutter for cross-platform efficiency, WalletX connects to multiple financial APIs through a Firebase backend. The architecture includes:</p>
+                <ul class="feature-list">
+                    <li>Firestore for real-time data synchronization</li>
+                    <li>Cloud Functions for processing market data</li>
+                    <li>Firebase Authentication with biometric security</li>
+                    <li>Optimized API calls to minimize data usage</li>
+                    <li>Local caching for offline functionality</li>
+                </ul>
+
+                <h3>User Experience</h3>
+                <p>The interface was designed with a focus on clarity and simplicity, allowing users to quickly understand their financial position without overwhelming data. Customizable widgets let users prioritize the information most relevant to them, while dark/light mode support ensures comfortable viewing in any environment.</p>
+            </div>
+
+            <div class="project-meta">
+                <div class="meta-section">
+                    <h3><i class="fas fa-calendar-alt"></i> Development Period</h3>
+                    <p><strong>Initial Release:</strong> March 2023</p>
+                    <p><strong>Current Version:</strong> 2.1.4</p>
+                    <p><strong>Last Updated:</strong> June 2023</p>
+                </div>
+
+                <div class="meta-section">
+                    <h3><i class="fas fa-code"></i> Technology Stack</h3>
+                    <div class="tech-list">
+                        <span class="tech-item">Flutter</span>
+                        <span class="tech-item">Firebase</span>
+                        <span class="tech-item">Dart</span>
+                        <span class="tech-item">Finnhub API</span>
+                        <span class="tech-item">CoinGecko API</span>
+                        <span class="tech-item">Firestore</span>
+                        <span class="tech-item">Cloud Functions</span>
+                    </div>
+                </div>
+
+                <div class="meta-section">
+                    <h3><i class="fas fa-link"></i> Project Resources</h3>
+                    <div class="project-links-list">
+                        <a href="#"><i class="fab fa-github"></i> Source Code</a>
+                        <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#"><i class="fas fa-file-pdf"></i> Case Study</a>
+                        <a href="#"><i class="fas fa-video"></i> Feature Walkthrough</a>
+                    </div>
+                </div>
+
+                <div class="meta-section">
+                    <h3><i class="fas fa-chart-line"></i> Metrics</h3>
+                    <p><strong>Users:</strong> 5,000+</p>
+                    <p><strong>API Calls/Day:</strong> ~250,000</p>
+                    <p><strong>Data Points:</strong> 1.2M+ tracked</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+</body>
+</html>

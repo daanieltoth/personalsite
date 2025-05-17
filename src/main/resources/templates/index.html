@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Toth | Creative Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ff88;
+            --secondary: #060606;
+            --background: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --text-light: #e0e0e0;
+            --text-muted: #777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .full-width {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(15, 15, 15, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-circle {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,136,0.1) 0%, rgba(15,15,15,0) 70%);
+            z-index: -1;
+            animation: pulse 15s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.2); opacity: 0.1; }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            aspect-ratio: 1/1;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,255,136,0.2) 0%, rgba(0,204,255,0.2) 100%);
+            mix-blend-mode: overlay;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+
+        .courses {
+            padding: 5rem 0;
+            background: rgba(10,10,10,0.7);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 500px;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,255,136,0.1);
+            border-color: rgba(0,255,136,0.2);
+        }
+
+        .course-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .course-card .provider {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .course-card .provider i {
+            color: var(--primary);
+        }
+
+        .course-card .date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 1rem;
+        }
+
+
+        .projects {
+            padding: 5rem 0;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .project-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8));
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        .education {
+            padding: 5rem 0;
+            background: rgba(10,10,10,0.7);
+        }
+
+        .education-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .education-item:hover {
+            transform: translateX(10px);
+            border-color: rgba(0,255,136,0.2);
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .education-date {
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .education-institution {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .education-institution i {
+            color: var(--primary);
+        }
+
+        .education-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+
+        .contact {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+
+        .contact-btn:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,255,136,0.2);
+        }
+
+
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text {
+                order: 2;
+                text-align: center;
+            }
+
+            .hero-text p {
+                max-width: 100%;
+            }
+
+            .hero-image {
+                order: 1;
+                max-width: 400px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .project-grid, .course-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <span class="logo-circle"></span>
+                Daniel Toth
+            </div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#courses">Courses</a></li> <!-- Updated nav order -->
+                <li><a href="#education">Education</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section id="home" class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text animate-fade-in">
+                <h1>Young Creative Technologist</h1>
+                <p>I'm a creative full-stack developer and technologist who loves building smart systems and interactive web experiences that actually connect with people.
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/TDDani" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/daniel-t%C3%B3th-28116a296/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/daanieltoth/" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="hero-image animate-fade-in">
+                <img src="/static/images/pfp.jpg" alt="Developer working">
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="projects">
+    <div class="container">
+        <div class="section-header">
+            <h2>Projects</h2>
+            <p>These are projects that I've worked on</p>
+        </div>
+        <div class="project-grid">
+            <a href="/walletx" style="text-decoration: none; color: inherit;">
+                <div class="project-card animate-fade-in">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="project-content">
+                        <h3>Wallet X</h3>
+                        <p>Wallet that is up to date with crypto fiats and stocks. I use it for my own finance tracking.</p>
+                        <div class="skills">
+                            <span class="skill">Flutter</span>
+                            <span class="skill">Firebase</span>
+                            <span class="skill">API</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+
+        </div>
+    </div>
+</section>
+
+<section id="courses" class="courses full-width">
+    <div class="container">
+        <div class="section-header">
+            <h2>Completed Courses</h2>
+            <p>Most important courses I've completed!</p>
+        </div>
+        <div class="course-grid">
+            <div class="course-card animate-fade-in">
+                <h3>Algorithms and Data Structures</h3>
+                <div class="provider"><i class="fas fa-university"></i> Eötvös Loránd University</div>
+                <p>Mastered fundamental algorithms (sorting, searching) and data structures (trees, graphs, hash tables) with practical implementations.</p>
+                <span class="date">Completed: June 2025</span>
+            </div>
+
+            <div class="course-card animate-fade-in">
+                <h3>Full Flutter Development</h3>
+                <div class="provider"><i class="fas fa-graduation-cap"></i> Udemy</div>
+                <p>Comprehensive mobile development course covering Flutter framework, Dart programming, and building cross-platform applications.</p>
+                <span class="date">Completed: August 2024</span>
+            </div>
+
+            <div class="course-card animate-fade-in">
+                <h3>Calculus I</h3>
+                <div class="provider"><i class="fas fa-university"></i> Eötvös Loránd University</div>
+                <p>Studied limits, derivatives, integrals, and their applications with rigorous mathematical foundations.</p>
+                <span class="date">Completed: June 2025</span>
+            </div>
+
+            <div class="course-card animate-fade-in">
+                <h3>Object-Oriented Programming</h3>
+                <div class="provider"><i class="fas fa-university"></i> Eötvös Loránd University</div>
+                <p>Learned OOP principles (encapsulation, inheritance, polymorphism) and design patterns through Java and C++ implementations.</p>
+                <span class="date">Completed: June 2025</span>
+            </div>
+
+            <div class="course-card animate-fade-in">
+                <h3>Web Development Fundamentals</h3>
+                <div class="provider"><i class="fas fa-university"></i> Eötvös Loránd University</div>
+                <p>Covered HTML5, CSS3, JavaScript, and responsive design principles for modern web applications.</p>
+                <span class="date">Completed: June 2025</span>
+            </div>
+
+            <div class="course-card animate-fade-in">
+                <h3>Discrete Mathematics</h3>
+                <div class="provider"><i class="fas fa-university"></i> Eötvös Loránd University</div>
+                <p>Studied mathematical foundations for computer science including logic, set theory, combinatorics, and graph theory.</p>
+                <span class="date">Completed: June 2025</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="education" class="education full-width">
+    <div class="container">
+        <div class="section-header">
+            <h2>Education</h2>
+            <p>My formal education and specialized training that shaped my technical foundation.</p>
+        </div>
+        <div class="studies-list">
+            <div class="education-item animate-fade-in">
+                <div class="education-header">
+                    <h3 class="education-title">Computer Science</h3>
+                    <span class="education-date">2024 Sept - </span>
+                </div>
+                <p class="education-institution"><i class="fas fa-university"></i> Eötvös Lóránd University - Budapest</p>
+                <p class="education-description">
+                   Currently on my second semester, I plan to master in artificial intelligence.
+                </p>
+            </div>
+
+            <div class="education-item animate-fade-in">
+                <div class="education-header">
+                    <h3 class="education-title">Mechatronics</h3>
+                    <span class="education-date">2025 Sept - </span>
+                </div>
+                <p class="education-institution"><i class="fas fa-university"></i> Óbudai Egyetem - Budapest</p>
+                <p class="education-description">
+                    Haven't started yet, but I plan to wider my knowledge with physics and progamming different machines.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <div class="container">
+        <p>© 2025 Daniel Toth. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.course-card, .project-card, .education-item, .section-header h2, .section-header p, .contact h2, .contact p, .contact-btn').forEach((el) => {
+        observer.observe(el);
+    });
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.3)';
+        } else {
+            header.style.boxShadow = 'none';
+        }
+    });
+</script>
+</body>
+</html>
